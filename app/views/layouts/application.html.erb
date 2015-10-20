@@ -7,7 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<% if current_user %>
+  <%= current_user.email %>
+  <%= form_tag session_path, method: "delete" do %>
+    <%= submit_tag "logout"%>
+  <% end %>
+<% else %>
+  <%= form_tag session_path do %>
+    <%= email_field_tag :email %>
+    <%= submit_tag "login"%>
+  <% end %>
+  <%= form_tag signup_path do %>
+    <%= email_field_tag :email %>
+    <%= submit_tag "signup"%>
+  <% end %>
+<% end %>
 <%= yield %>
 
 </body>
